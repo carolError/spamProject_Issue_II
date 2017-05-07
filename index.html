@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+    <head>
+
+
+        <title>Test von Web GL</title>
+        <meta charset="utf-8">
+
+    <link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.color.js"></script>
+    <script type="text/javascript" src="js/popUpScript.js"></script>
+    <link href="js/style.css" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        div.info2 {
+				color: #653693;
+				font-size: 1.1em;
+				/*display:block;
+				//position:absolute;
+    			/*bottom:0;
+   				right:0;*/
+			}
+			
+			div.credits{
+				font-size: 0.8em;
+			}
+			
+			div a.livebox{
+				
+				color: #75A39E;
+				text-decoration: underline;
+			}
+			
+			div.info-wrapper{
+				position: absolute;
+				margin: 1em 0em 0em 1.5em;
+				display: block;
+				top: 0px;
+				width:500px;
+				height:500px;
+				/*background:rgba(0,0,0,0.03)*/
+			}
+
+
+			div.info {
+			
+				/*position: absolute;*/
+				color: #beaf4b;
+				font-size: 0.8em;
+				
+				/*
+				top: 10px;
+				right: 10px;
+				bottom: 10px;
+				width: 250px;
+				/**/	
+			}
+
+            A:visited {
+					color: #0000ff;
+			}
+			A:link { 
+					color: #0000ff;
+					text-decoration: none; 
+					font-weight: normal ;
+			}
+			
+			/*	
+			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }*/
+			div.info2 a, .button { font-family: 'Armata', sans-serif;color: #DC897C; font-weight: bold; /*text-decoration: underline*/; cursor: pointer ; line-height: 180%;}
+			
+			#tema{
+				color: #DC897C;
+			}
+        </style>
+
+        <script src="js/three.min.js"></script>
+        <script src="js/ColladaLoader.js"></script>
+        <script src="js/MorphAnimMesh.js"></script>
+        <script src="js/MorphAnimation.js"></script>
+        <script src="js/OrbitControls.js"></script>
+        <script src="js/Mirror.js"></script>
+        <script src="js/GPUParticleSystem.js"></script>
+        
+
+        <script src="js/Animation.js"></script>
+		<script src="js/AnimationHandler.js"></script>
+    </head>
+    <body style="margin: 0; padding: 0; overflow: hidden">
+        <div class=info-wrapper>
+		
+		<div class="info2"><a href="#" class="topopup" id="Popup8">SPAM PROJECT</a><br /></div>
+		<!-- <div id="tema">'I forgot the password and my Doppelgänger will destroy me'<br /><br /></div> -->
+		</div>
+        <div id="toPopup8" class="popup">
+        <div class="close"></div>
+		<div id="popup_header"> 
+            <div class="info2"><p align="center">ISSUE_02:  </p></div>
+            <div id="tema"><p align="center">'Survival of the Twittest'</p></div>
+        </div>
+		<div id="popup_content"> 
+            <div id="popup_container">
+			    
+		        <p align="center">
+	          	In 1982, Walter Ong brought us the term "secondary orality". This refers mainly to television, radio and telephone communication. Since it is a post-literate orality, it doesn't serve  as a sole medium of collective consciousness and memory. Instead it depends for its existence and functioning on writing and print.  Ong also examined the pre-literate cultures and how the organization of the mind and consciousness change with the beginning of writing. Memory before writing had a totally different role. Knowledge, once acquired, had to be constantly repeated or it would be lost: fixed, formulaic thought patterns were essential for wisdom and effective administration.
+
+                Without writing, words as such have no visual presence. They are events. Language is a mode of action and not simply a countersign of thought. 
+
+                For Marshal McLuhan (The Gutenberg Galaxy, 1969), writing is a visual enclosure of non-visual spaces and senses. It is, therefore, an abstraction of the visual from the ordinary sense interplay. And whereas speech is an outering (utterance) of all of our senses at once, writing abstracts from speech. With print the eye speeded up and the voice quieted down. But inner verbalizing was taken for granted as inseparable from the horizontal following of the words on the page. Today we know that the divorce of reading and verbalizing can be made by vertical reading.
+
+                So vertical reading, and constant repeatability to avoid the risk of loss, rings the proverbial bell in the present too. The strategy of generating short, intense and repeated content to luckily create the next meme has a lot to do with a society of immediacy, audience and performance. Social media is not orality. Quite the contrary  is mostly based on text.
+
+                But is nothing like the writing before the tv and telephone..
+
+                Is this perhaps a second literacy?
+			
+				<div class="credits"><p align="center">
+				<p align="center">artists managment and concept by <a href= "http://markusrico.com/"  class="livebox" >Markus Rico</a></p> 
+		        <p align="center">development and concept by <a href= "http://carolinaromano.net/"  class="livebox" >Carolina Romano</a></p> 
+                <p align="center">All the pieces were adapted to THREE.js by <a href= "http://carolinaromano.net/"  class="livebox" >Carolina Romano</a></p>
+
+                <p align="center">Artist on this issue:</p>
+                <p align="center">    <a href= "http://www.marcocadioli.com/"  class="livebox" >Marco Cadioli</a></p>
+                <p align="center">    <a href= "http://jongillie.tumblr.com/"  class="livebox" >Jon Gillie</a></p> 
+                <p align="center">    <a href= "http://www.jonuriarte.es/"     class="livebox" >Jon Uriarte</a></p> 
+                <p align="center">    <a href= "http://www.hellocatfood.com/"  class="livebox" >Antonio Roberts</a></p> 
+                <p align="center">    <a href= "http://www.srcxor.org/blog/"   class="livebox" >Mark Klink</a></p> 
+                <p align="center">    <a href= "https://vimeo.com/unapiedranegra"   class="livebox" >Mateo Amaral</a></p> 
+                <p align="center">    <a href= "http://troyduguid.com/"        class="livebox" >Troy Duguid</a></p> 
+		        </div></div>
+		        </div>
+	    </div> 
+
+        <video id="antonio" autoplay loop style="display:none" controls muted>
+			<source src="data/antonioVideo.mp4"  type="video/mp4">
+			<source src="data/antonioVideo.ogv"  type="video/ogg">
+		</video>
+        
+        <video id="signos" autoplay loop style="display:none" controls muted>
+			<source src="data/signos_3.mp4"  type="video/mp4">
+			<source src="data/signos_3.ogv"  type="video/ogg">
+		</video>
+        
+        <video id="cdsca" autoplay loop style="display:none" controls muted>
+			<source src="data/cdsca.mp4"  type="video/mp4">
+			<source src="data/cdsca.ogv"  type="video/ogg">
+		</video>
+        
+        <video id="strobo" autoplay loop style="display:none" controls muted>
+			<source src="data/color_strobo.mp4"  type="video/mp4">
+			<source src="data/color_strobo.ogv"  type="video/ogg">
+		</video>
+        
+         <video id="guillie" autoplay loop style="display:none" controls muted>
+			<source src="data/jonGuillie.mp4"  type="video/mp4">
+			<source src="data/jonGuillie.ogv"  type="video/ogg">
+		</video>
+
+         <video id="marco" autoplay loop style="display:none" controls muted>
+			<source src="data/marco.mp4"  type="video/mp4">
+			<source src="data/marco.ogv"  type="video/ogg">
+		</video>
+        <video id="azul" autoplay loop style="display:none" controls muted>
+			<source src="data/azul.mp4"  type="video/mp4">
+			<source src="data/azul.ogv"  type="video/ogg">
+		</video>
+        <video id="astrid" autoplay loop style="display:none" controls muted>
+			<source src="data/astrid.mp4"  type="video/mp4">
+			<source src="data/astrid.ogv"  type="video/ogg">
+		</video>
+        
+
+        <script>
+            
+            var WIDTH = window.innerWidth;
+			var HEIGHT = window.innerHeight;
+            var glassMirror, mirrorMirror;
+            
+            var scene, camera, renderer;
+            
+            var loaderAntonio, animation;
+            var loaderTroy1, loaderTroy2, loaderTroy3, animationT1;
+            var loaderCaro;
+            var loaderAzul;
+            var models = [];
+            
+            var antonio = new Video("antonio",1536,1152);
+            var signos = new Video("signos",320,180);
+            var cdsca = new Video("cdsca",320,180);
+            var strobo = new Video("strobo",320,180);
+            var guillie = new Video("guillie",1280,720);
+            var marco = new Video("marco",910,512);
+            var azul = new Video("azul", 240,180);
+            var astrid = new Video("astrid", 420, 262);
+            
+            var daeMeshKlink = undefined;
+            var clock = new THREE.Clock();
+            var textGeo;
+            var tick = 0;
+            var partC, partD, partG, partT;
+            var partMatC, partMatD, partMatG, partMatT;
+            var dirC = 1;
+            var dirD = 1; 
+            var dirG = 1;
+            var dirT = 1;
+            var options, spawnerOptions, particleSystem;
+   
+
+            
+			
+            
+            init();
+            animate();
+            
+            function Video(id,wi,hi){
+				this.id = id
+				this.video = document.getElementById( id );
+				this.video.play();
+				
+				this.image = document.createElement( 'canvas' );
+				this.image.width = wi;
+				this.image.height = hi;
+				if(typeof w==='undefined') wi = window.innerWidth;
+				if(typeof h==='undefined') hi = window.innerHeight;
+				
+				this.imageContext = this.image.getContext( '2d' );
+				this.imageContext.fillStyle = '#000000';
+				this.imageContext.fillRect( 0, 0, wi, hi );
+
+				this.texture= new THREE.Texture( this.image );
+				this.texture.minFilter = THREE.LinearFilter;
+				this.texture.magFilter = THREE.LinearFilter;
+				
+				this.update = function(){
+					if ( this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+
+						this.imageContext.drawImage( this.video, 0, 0 );
+
+						if ( this.texture ) this.texture.needsUpdate = true;
+
+					}
+				}
+				//return this;
+	        }
+            
+            
+manager.onLoad = function()
+{
+    Renderer.render( Scene, camera );
+    console.log(Renderer.domElement.toDataURL());
+}
+            
+       
+            
+            function init(font) {
+                scene = new THREE.Scene();
+                var WIDTH = window.innerWidth,
+                    HEIGHT = window.innerHeight;
+
+
+
+                renderer = new THREE.WebGLRenderer({antialias:true});
+                renderer.setSize(WIDTH, HEIGHT);
+                renderer.setPixelRatio( window.devicePixelRatio );
+                document.body.appendChild(renderer.domElement);
+                
+                camera = new THREE.PerspectiveCamera(50, WIDTH / HEIGHT, 0.1, 10000000);
+                camera.position.set(0,300,700);
+                camera.up = new THREE.Vector3(0,1,0);
+                camera.lookAt(new THREE.Vector3(0,0,0)); 
+                scene.add(camera);
+                
+                window.addEventListener('resize', function() {
+                    var WIDTH = window.innerWidth,
+                    HEIGHT = window.innerHeight;
+                    renderer.setSize(WIDTH, HEIGHT);
+                    camera.aspect = WIDTH / HEIGHT;
+                    camera.updateProjectionMatrix();
+                });
+
+                //--PARTICLE particleSystem
+
+                particleSystem = new THREE.GPUParticleSystem({
+                    maxParticles: 250
+                });
+               
+                scene.add( particleSystem);
+                //console.log(particleSystem);
+                particleSystem.position.set(-25+500,30,-400);
+          
+                options = {
+                position: new THREE.Vector3(),
+                positionRandomness: 25,
+
+                velocity: new THREE.Vector3(),
+                velocityRandomness: .5,
+                color: 0xff88aa,
+                colorRandomness: .2,
+                turbulence: 5.5,
+                lifetime: 1,
+                size: 70,
+                sizeRandomness: 50
+                };
+                spawnerOptions = {
+                    spawnRate: 1500,
+                    //horizontalSpeed: 2.5,
+                    verticalSpeed: 10,
+                    timeScale: 0.5
+                };
+
+
+
+
+                //---END particleSystem
+
+                
+
+            var lightJonUriarte =  new THREE.SpotLight( 0xffffff,0.5 );
+            lightJonUriarte.position.set(0,100,0);
+            lightJonUriarte.target.position.set(-250,0,-200); 
+            scene.add(lightJonUriarte); 
+            scene.add( lightJonUriarte.target );        
+
+            var lightMark =  new THREE.SpotLight( 0xffffff,0.5,0,Math.PI/9);
+            lightMark.position.set(0,100,0);
+            lightMark.target.position.set(200,80,-200); 
+            scene.add(lightMark); 
+            scene.add( lightMark.target );  
+
+            var lightTroy =  new THREE.SpotLight( 0xffffff,0.5,0,Math.PI/9);
+            lightTroy.position.set(0,100,0);
+            lightTroy.target.position.set(430,30,0); 
+            scene.add(lightTroy); 
+            scene.add( lightTroy.target );  
+
+            var lightTroy2 =  new THREE.SpotLight( 0xffffff,0.5,0,Math.PI/9);
+            lightTroy2.position.set(730,30,200);
+            lightTroy2.target.position.set(430,30,0); 
+            scene.add(lightTroy2); 
+            scene.add( lightTroy2.target ); 
+
+            var lightTroy3 =  new THREE.SpotLight( 0xffffff,0.5,0,Math.PI/9);
+            lightTroy3.position.set(730,30,-200);
+            lightTroy3.target.position.set(430,30,0); 
+            scene.add(lightTroy3); 
+            scene.add( lightTroy3.target );
+
+            var lightMateo =  new THREE.SpotLight( 0xffffff,0.5,0,Math.PI/9);
+            lightMateo.position.set(0,100,0);
+            lightMateo.target.position.set(200,50,200); 
+            scene.add(lightMateo); 
+            scene.add( lightMateo.target );  
+
+           
+
+            var light5 = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.3 );
+            light5.position.set(0,500,0);
+            scene.add(light5);
+                       
+            
+            var loader1 = new THREE.ColladaLoader();
+            var loader2 = new THREE.ColladaLoader();
+            var loader2b = new THREE.ColladaLoader();
+            var loader3 = new THREE.ColladaLoader();
+            var loader4 = new THREE.ColladaLoader();
+            var loader5 = new THREE.ColladaLoader();
+            var loader6 = new THREE.ColladaLoader();
+            
+            loader1.options.convertUpAxis = true;
+            loader2.options.convertUpAxis = true;
+            loader3.options.convertUpAxis = true;
+            loader4.options.convertUpAxis = true;
+            loader5.options.convertUpAxis = true;
+            loader6.options.convertUpAxis = true;
+
+            var loader = new THREE.FontLoader();
+            loader.load( 'data/helvetiker_regular.typeface.json', function ( font ) {
+
+				var textGeoAntonio = new THREE.TextGeometry( "Antonio Roberts", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+                } );
+
+                var textGeoJonG = new THREE.TextGeometry( "Jon Gillie", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                var textGeoMateo = new THREE.TextGeometry( "Mateo Amaral", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                var textGeoJonU = new THREE.TextGeometry( "Jon Uriarte", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                var textGeoMark= new THREE.TextGeometry( "Mark Klink", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                var textGeoTroy= new THREE.TextGeometry( "Troy Duguid", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                var textGeoMarco= new THREE.TextGeometry( "Marco Cadioli", {
+
+                font: font,
+
+                size: 10,
+                height: 1,
+                curveSegments: 12,
+
+                } );
+
+                ///TEXT---------------------------------------------------
+
+                var textMaterial = new THREE.MeshBasicMaterial({ color: 0x7ECEB1});
+
+                var meshAntonio = new THREE.Mesh( textGeoAntonio, textMaterial );
+                meshAntonio.position.set( -60,300,0 );
+                scene.add( meshAntonio );
+
+                ///END-TEXT---------------------------------------------------
+
+                var meshJonG = new THREE.Mesh( textGeoJonG, textMaterial );
+                meshJonG.position.set( -220,300,155 );
+                scene.add( meshJonG );
+
+                var meshMateo = new THREE.Mesh( textGeoMateo, textMaterial );
+                meshMateo.position.set( 110,300,155 );
+                scene.add( meshMateo );
+
+                var meshJonU = new THREE.Mesh( textGeoJonU, textMaterial );
+                meshJonU.position.set( -230,300,-160 );
+                scene.add( meshJonU );
+
+                var meshMark = new THREE.Mesh( textGeoMark, textMaterial );
+                meshMark.position.set( 95,300,-160 );
+                scene.add( meshMark );
+
+                var meshTroy = new THREE.Mesh( textGeoTroy, textMaterial );
+                meshTroy.position.set( 297,300,0 );
+                scene.add( meshTroy );
+
+                var meshMarco = new THREE.Mesh( textGeoMarco, textMaterial );
+                meshMarco.position.set( -420,300,0 );
+                scene.add( meshMarco );
+
+
+			} );
+
+            
+           
+
+//ANTONIO ROBERTS
+
+            loaderAntonio = new THREE.JSONLoader();
+            loaderAntonio.load ('data/antonio_v04.json', addModel);
+
+            var geometryAnt = new THREE.PlaneGeometry( 1536, 1152 );
+            var materialAnt = new THREE.MeshBasicMaterial( {map: antonio.texture, side: THREE.DoubleSide} );
+            var planeAnt = new THREE.Mesh( geometryAnt, materialAnt );
+
+
+            planeAnt.position.x = -30,0,0;
+            planeAnt.rotation.x = Math.PI / 2;
+            planeAnt.rotation.Z = Math.PI ;
+            planeAnt.scale.set(0.1,0.1,1);
+            scene.add(planeAnt);
+            
+            var gridXZ1 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+            gridXZ1.position.set(-25,0,0 );
+            scene.add(gridXZ1);
+            
+            
+            
+
+            
+//JON URIARTE
+            
+            loader2.load( 'data/jonUriarte_reader_2.dae', function ( collada ) {
+                var dae2 = collada.scene;
+                var skin2 = collada.skins[ 0 ];
+                dae2.position.set(-300,0,-150);
+                dae2.scale.set(20,20,20);
+                var reader = dae2.children[0].children[0];
+                var loader = new THREE.TextureLoader();
+                var texture = loader.load('data/reader_color.jpg');
+                reader.material = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture });
+                scene.add(dae2);
+
+                
+                var gridXZ2 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+                gridXZ2.position.set(-250,0,-200 );
+                scene.add(gridXZ2);
+            });
+
+            loader2b.load( 'data/jonUriarte_naturaleza.dae', function ( collada ) {
+                var dae2b = collada.scene;
+                var skin2b = collada.skins[ 0 ];
+                dae2b.position.set(-200,0,-250);
+                dae2b.scale.set(30,30,30);
+                dae2b.rotation.x = -1* (Math.PI / 2);
+                var naturaleza = dae2b.children[0].children[0];
+                var loader = new THREE.TextureLoader();
+                var texture = loader.load('data/unnamed.jpg');
+                naturaleza.material = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture });
+                scene.add(dae2b);
+
+                
+                
+            });
+            
+//JON GUILLE
+                
+                var geometry = new THREE.PlaneGeometry( 1280, 720 );
+                var material = new THREE.MeshBasicMaterial( {map: guillie.texture, side: THREE.DoubleSide} );
+                var plane = new THREE.Mesh( geometry, material );
+
+                plane.position.set(-240,30,200);
+                plane.scale.set(0.1,0.1,1);
+                plane.rotation.set(0,-45,0);
+                scene.add(plane);               
+                
+                var gridXZ3 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+                gridXZ3.position.set(-250,0,200 );
+                scene.add(gridXZ3);         
+        
+            
+
+//MARCO CADIOLI
+            
+            var geometry = new THREE.PlaneGeometry( 800, 450 );
+            var material = new THREE.MeshBasicMaterial( {map: marco.texture, side: THREE.DoubleSide} );
+            var plane = new THREE.Mesh( geometry, material );
+
+            plane.position.set(-480,50,0);
+            plane.scale.set(0.16,0.16,1);
+            plane.rotation.set(0,45,0);
+            scene.add(plane);               
+                
+            var gridXZ7 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+            gridXZ7.position.set(-480,0,0 );
+            scene.add(gridXZ7);
+            
+            
+
+//MARK KLING
+
+            loader4.load( 'data/Mark_kling_2.dae', function ( collada ) {
+                //dummy1.dae
+                var dae4 = collada.scene;
+                var skin4 = collada.skins[ 0 ];
+                dae4.position.set(200,100,-280);
+                dae4.scale.set(10,10,10);
+                
+                daeMeshKlink = dae4;
+                
+                daeMeshKlink_head = dae4.children[3].children[0];
+                
+                daeMeshKlink_head.material.side = THREE.DoubleSide;
+                daeMeshKlink_head.material = new THREE.MeshPhongMaterial( { color: 0xffffff} );
+                
+                mat = new THREE.MeshBasicMaterial( { color: 0xff0000} );
+                mat2 = new THREE.MeshBasicMaterial( { color: 0x000000} );
+                
+                daeMeshKlink_glasses = dae4.children[2].children[0];
+                daeMeshKlink_mirror = dae4.children[0].children[0];
+                
+                glassMirror = new THREE.Mirror( renderer, camera, { clipBias: 0.003, textureWidth: 1024, textureHeight: 1024, color: 0x777777, debugMode: false } );
+                mirrorMirror = new THREE.Mirror( renderer, camera, { clipBias: 0.003, textureWidth: 1024, textureHeight: 1024, color:0x889999, debugMode: false } );
+                daeMeshKlink_glasses.add(glassMirror);
+                daeMeshKlink_glasses.material = glassMirror.material;
+                
+                daeMeshKlink_mirror.add(mirrorMirror);
+                daeMeshKlink_mirror.material = mirrorMirror.material;
+                
+                scene.add(dae4);
+
+                
+                
+                var gridXZ4 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+                gridXZ4.position.set(200,0,-200 );
+                scene.add(gridXZ4);
+            });
+            
+ //MATEO AMARAL           
+            
+            loader5.load( 'data/Mateo_amaral_9.dae', function ( collada ) {
+                var dae5 = collada.scene;
+                var skin5 = collada.skins[ 0 ];
+                var axis = new THREE.Vector3(0,1,0);
+                dae5.rotateOnAxis(axis,-1*(Math.PI/4));
+                dae5.position.set(200,0,200);
+                dae5.scale.set(50,50,50);
+                var daeMeshSignos = dae5.children[0].children[1].children[0];
+                daeMeshSignos.material.emissive = new THREE.Color(100,100,100);
+                daeMeshSignos.material.emissiveIntensity = 0.008;
+                daeMeshSignos.material.emissiveMap = signos.texture;
+                daeMeshSignos.material.side = THREE.DoubleSide;
+                daeMeshSignos.material.map = signos.texture;
+                daeMeshSignos.rotation.z = Math.PI;
+                
+                var daeMeshCdsca = dae5.children[0].children[2].children[0];
+                daeMeshCdsca.material.side = THREE.DoubleSide;
+                daeMeshCdsca.material.emissive = new THREE.Color(100,100,100);
+                daeMeshCdsca.material.emissiveIntensity = 0.008;
+                daeMeshCdsca.material.emissiveMap = cdsca.texture;
+                daeMeshCdsca.material.map = cdsca.texture;
+                
+                var daeMeshStrobo = dae5.children[0].children[0].children[0];
+                daeMeshStrobo.material.side = THREE.DoubleSide;
+                daeMeshStrobo.material.emissive = new THREE.Color(100,100,100);
+                daeMeshStrobo.material.emissiveIntensity = 0.005;
+                daeMeshStrobo.material.emissiveMap = strobo.texture;
+                daeMeshStrobo.material.map = strobo.texture;
+                
+                
+                scene.add(dae5);
+                
+                
+                var gridXZ5 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+                gridXZ5.position.set(200,0,200 );
+                scene.add(gridXZ5);
+            });
+
+            
+
+//TROY DUGUID
+             
+            loaderTroy1 = new THREE.JSONLoader();
+            loaderTroy1.load ('data/troy1.json', addModel_troy1);
+            loaderTroy2 = new THREE.JSONLoader();
+            loaderTroy2.load ('data/troy2.json', addModel_troy2);
+            loaderTroy3 = new THREE.JSONLoader();
+            loaderTroy3.load ('data/troy3.json', addModel_troy3);
+            
+            var gridXZ6 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+            gridXZ6.position.set(430,0,0 );
+            scene.add(gridXZ6);
+            
+
+
+            loaderCaro = new THREE.JSONLoader();
+            loaderCaro.load ("data/people.json", addModel_caro);
+           
+
+
+ //CAROLINA ROMANO  
+
+            var gridXZ7 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+            gridXZ7.position.set(-25+500,0,-400 );
+            scene.add(gridXZ7);     
+ 
+ //-----PARTICULAS
+            //--DRESS
+            var partGeoD = new THREE.PlaneGeometry( 128,256, 1 );
+            var texloaderD = new THREE.TextureLoader();
+            var texD = texloaderD.load("data/dress.png");
+            partMatD = new THREE.MeshBasicMaterial({ map: texD, side: THREE.DoubleSide, transparent: true });
+            partD = new THREE.Mesh( partGeoD, partMatD );
+            partD.scale.set(0.25,0.25,0.25);
+            partD.position.x = -75+500;
+            partD.position.z = -400;
+            scene.add( partD );
+            //--CAT
+            var partGeoC = new THREE.PlaneGeometry( 256, 128, 1 );
+            var texloaderC = new THREE.TextureLoader();
+            var texC = texloaderC.load("data/cat.png");
+            partMatC = new THREE.MeshBasicMaterial({ map: texC, side: THREE.DoubleSide, transparent: true });
+            partC = new THREE.Mesh( partGeoC, partMatC );
+            partC.scale.set(0.25,0.25,0.25);
+            partC.position.x = -25+500;
+            partC.position.z = -350;
+            scene.add( partC );
+            //--GANG
+            var partGeoG = new THREE.PlaneGeometry( 128, 128, 1 );
+            var texloaderG = new THREE.TextureLoader();
+            var texG = texloaderG.load("data/gangnam.png");
+            partMatG = new THREE.MeshBasicMaterial({ map: texG, side: THREE.DoubleSide, transparent: true });
+            partMatG.needsUpdate = true;
+            partG = new THREE.Mesh( partGeoG, partMatG );
+            partG.scale.set(0.25,0.25,0.25);
+            partG.position.set(50+500,110,-450);
+            scene.add( partG );
+            //--TRUMP
+            var partGeoT = new THREE.PlaneGeometry( 128, 128, 1 );
+            var texloaderT = new THREE.TextureLoader();
+            var texT = texloaderT.load("data/trump.png");
+            partMatT = new THREE.MeshBasicMaterial({ map: texT, side: THREE.DoubleSide, transparent: true });
+            partT = new THREE.Mesh( partGeoT, partMatT );
+            partT.scale.set(0.25,0.25,0.25);
+            partT.position.x = 75+500;
+            partT.position.z = -380;
+            scene.add( partT );
+
+            //-----FIN___PARTICULAS     
+
+
+
+		    controls = new THREE.OrbitControls(camera, renderer.domElement);
+            }
+//AZUL DE MONTE
+
+
+           var gridXZ7 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+            gridXZ7.position.set(-25,0,-400 );
+            scene.add(gridXZ7);
+
+            var geometry = new THREE.PlaneGeometry( 240, 180 );
+            var material = new THREE.MeshBasicMaterial( {map: azul.texture, side: THREE.DoubleSide} );
+            var planeAzul = new THREE.Mesh( geometry, material );
+
+            planeAzul.position.set(-25,200,-400);
+            planeAzul.scale.set(0.6,0.6,0.6);
+            scene.add(planeAzul); 
+
+
+ 
+            var loaderAzul = new THREE.ColladaLoader();
+
+            loaderAzul.options.convertUpAxis = true;
+
+            loaderAzul.load( 'data/azul_mat.dae', function ( collada ) {
+
+
+            var dae = collada.scene;
+
+            var skin = collada.skins[ 0 ];
+
+            dae.position.set(-20,0,-400);
+            dae.scale.set(8,8,8);
+            console.log(dae);
+
+            scene.add(dae);
+
+        });
+        
+//VIDEO_ASTRID
+
+                var gridXZ7 = new THREE.GridHelper(100, 10, 0x8f8f8f);
+                gridXZ7.position.set(-480,0,-400 );
+                scene.add(gridXZ7);
+
+                var geometry = new THREE.PlaneGeometry( 420, 262 );
+                var material = new THREE.MeshBasicMaterial( {map: astrid.texture, side: THREE.DoubleSide} );
+                var planeAstrid = new THREE.Mesh( geometry, material );
+
+                planeAstrid.position.set(-480,100,-400);
+                planeAstrid.scale.set(0.5,0.5,0.5);
+                scene.add(planeAstrid); 
+
+
+
+
+
+//ADD_MODELS
+
+            function addModel_caro( geometry){
+            var material_1 = new THREE.MeshBasicMaterial({ color:0xff0000, side: THREE.DoubleSide });
+            var material_2 = new THREE.MeshBasicMaterial({ color:0x00ff00, side: THREE.DoubleSide });
+            var material_3 = new THREE.MeshBasicMaterial({ color:0x0000ff, side: THREE.DoubleSide });
+            
+            
+            var model_1 = new THREE.Mesh (geometry, material_2);
+            model_1.scale.set (12,12,12);
+            model_1.position.set(-25+500,0,-450);
+            scene.add(model_1);
+
+            var model_2 = new THREE.Mesh (geometry, material_1);
+            model_2.rotation.y = 90* Math.PI / 180;
+            model_2.scale.set (12,12,12);
+            model_2.position.set(-100+500,0,-400);
+            scene.add(model_2);
+
+            var model_3 = new THREE.Mesh (geometry, material_3);
+            model_3.rotation.y = -90 * Math.PI / 180;
+            model_3.scale.set (12,12,12);
+            model_3.position.set(50+500,0,-400);
+            scene.add(model_3);
+  
+            }  
+                     
+           
+            function addModel( geometry, materials){
+                var material = materials[0];
+                
+                for (var i = 0; i < materials.length; i++)
+                    materials [i].morphTargets = true;
+                
+                var model = new THREE.Mesh (geometry, material);
+                model.scale.set (12,12,12);
+                model.position.set(-30,0,0);
+                scene.add(model);
+                
+                animation = new THREE.MorphAnimation( model );
+                animation.play(); 
+                
+            }
+
+            
+
+            function addModel_troy1( geometry, materials){
+                var materialT1 = materials[0];
+                
+                for (var i = 0; i < materials.length; i++)
+                    materials [i].morphTargets = true;
+                
+                var modelT1 = new THREE.Mesh (geometry, materialT1);
+                modelT1.scale.set (10,10,10);
+                modelT1.position.set(430,0,0);
+                scene.add(modelT1);
+                
+                animationT1 = new THREE.MorphAnimation( modelT1 );
+                animationT1.play(); 
+
+  
+                
+            }
+            function addModel_troy2( geometry, materials){
+                var material = materials[0];
+                
+                
+                var model = new THREE.Mesh (geometry, material);
+                model.scale.set (10,10,10);
+                model.position.set(430,0,0);
+
+                scene.add(model);
+  
+                
+            }
+            function addModel_troy3( geometry, materials){
+               var material = new THREE.MeshBasicMaterial({color: 0x000000});
+                
+
+                
+                var model = new THREE.Mesh (geometry, material);
+                model.scale.set (10,10,10);
+                model.position.set(430,-2,0);
+
+                scene.add(model);
+                
+                
+            }
+
+            
+            
+            var prevTime = Date.now();
+            
+            function animate() {
+
+                requestAnimationFrame(animate);
+                if(daeMeshKlink !== undefined){
+                    glassMirror.renderWithMirror( mirrorMirror );
+				    mirrorMirror.renderWithMirror( glassMirror );
+                }
+                var time = Date.now();
+                if ( animation ) {
+                    animation.update( (time - prevTime)/3 );
+                }  
+                if ( animationT1 ) {
+                    animationT1.update( (time - prevTime)/3 );
+                }  
+                prevTime = time;
+
+                //---TIEMPO__PATRICULAS
+                var delta = clock.getDelta() * spawnerOptions.timeScale;
+			    tick += delta;
+			    if (tick < 0) tick = 0;
+                if (delta > 0) {
+                    options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed) * 50;
+                    for (var x = 0; x < spawnerOptions.spawnRate * delta; x++) {
+                        particleSystem.spawnParticle(options);
+                    }
+
+                    
+                    //--1
+                    partD.position.y +=  delta  *10* dirD;
+
+                    if (partD.position.y>200.0 ){
+                        dirD = dirD * -1;
+                        partD.position.y=200.0;
+                    } else if(partD.position.y<100.0){
+                        dirD = dirD * -1;
+                        partD.position.y=100.0;
+                    }
+                    partD.position.x += Math.sin(tick * 5) * 0.8;
+                    var Do = (partD.position.y-100)/100;
+                    partMatD.opacity = Do;
+                    //--2
+                    partC.position.y +=  delta  *12* dirC;
+
+                    if (partC.position.y>250.0 ){
+                        dirC = dirC * -1;
+                        partC.position.y=250.0;
+                    } else if(partC.position.y<90.0){
+                        dirC = dirC * -1;
+                        partC.position.y=90.0;
+                    }
+                    partC.position.x += Math.sin(tick * 8) * 2;
+                    var Co = (partC.position.y-90)/160;
+                    partMatC.opacity = Co;
+                    //--3
+                    partG.position.y +=  delta  * 8 * dirG;
+
+                    if (partG.position.y>250.0 ){
+                        dirG = dirG * -1;
+                        partG.position.y=250.0;
+                    } else if(partG.position.y<110.0){
+                        dirG = dirG * -1;
+                        partG.position.y=110.0;
+                    }
+                    partG.position.x += Math.sin(tick * 5) * 0.8;
+                    var Go = (partG.position.y-110)/140;
+                    partMatG.opacity = Go;
+                    partT.position.y +=  delta  *10* dirT;
+
+                    if (partT.position.y>210.0 ){
+                        dirT = dirT * -1;
+                        partT.position.y=210.0;
+                    } else if(partT.position.y<85.0){
+                        dirT = dirT * -1;
+                        partT.position.y=85.0;
+                    }
+                    partT.position.x += Math.sin(tick * 9) * 1.3;
+                    var To = (partT.position.y-85)/125;
+                    partMatT.opacity = To;
+                    particleSystem.update(tick);
+                    //---FIN____TIEMPO__PATRICULAS
+			    }
+			    
+                
+              
+                renderer.render(scene, camera);
+                controls.update();
+                antonio.update();
+                signos.update();
+                cdsca.update();
+                strobo.update();
+                guillie.update();
+                marco.update();
+                azul.update();
+                astrid.update();
+    
+                
+            }
+
+            
+    
+
+
+
+
+            
+        </script>
+    </body>
+</html> 
